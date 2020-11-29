@@ -8,6 +8,7 @@ RUN npm run build
 # for each FROM is like a separate block
 
 FROM nginx
+EXPOSE 80
 COPY --from=0 /app/build /usr/share/nginx/html
 
 # default port on nginx is 80 

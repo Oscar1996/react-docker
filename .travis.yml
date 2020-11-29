@@ -9,3 +9,23 @@ before_install:
 script:
   # -- --coverage exit the process when the test are finished
   - docker run -e CI=true oscarval196/react-docker npm run test -- --coverage
+
+
+# AWS configuration
+# in a single container application docker elastickbean watch for Dockerfile only if
+# running by 64bit Amazon Linux Platform
+deploy: 
+  provider: elasticbeanstalk
+  region: 'us-east-2'
+  app: 'react-redux'
+  env: 'ReactRedux-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-980706433400'
+  bucket_path: 'react-redux' # the same as the app
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY # enviroment variables on travis ci
+  secret_access_key: $AWS_PRIVATE_KEY
+
+
+
+#http://reactredux-env.eba-skqipwnr.us-east-2.elasticbeanstalk.com/
