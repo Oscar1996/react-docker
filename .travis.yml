@@ -1,0 +1,11 @@
+sudo: required
+language: generic
+services:
+  - docker
+  
+before_install:
+  - docker build -t oscarval196/react-docker -f Dockerfile.dev .
+
+script:
+  # -- --coverage exit the process when the test are finished
+  - docker run -e CI=true oscarval196/react-docker npm run test -- --coverage
